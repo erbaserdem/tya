@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace ECommerce.Models
 {
-    class ShoppingCart
+    public class ShoppingCart
     {
-        public ShoppingCart(IEnumerable<Item> items, decimal couponDiscountAmount)
+        public ShoppingCart(List<Item> items, decimal couponDiscountAmount)
         {
             Items = items;
             CouponDiscountAmount = couponDiscountAmount;
@@ -17,7 +17,7 @@ namespace ECommerce.Models
             CouponDiscountAmount = 0;
         }
 
-        public IEnumerable<Item> Items { get; private set; }
+        public List<Item> Items { get; private set; }
 
         public decimal ItemsTotalAmount
         {
@@ -26,7 +26,7 @@ namespace ECommerce.Models
                 decimal c = 0;
                 foreach (var item in Items)
                 {
-                    c += item.Quantity * item.Product.Price;
+                    c +=item.TotalItemAmount;
                 }
 
                 return c;
@@ -40,7 +40,7 @@ namespace ECommerce.Models
                 decimal c = 0;
                 foreach (var item in Items)
                 {
-                    c += item.Quantity * item.TotalItemAmount;
+                    c += item.TotalDiscountedItemAmount;
                 }
 
                 return c;
@@ -50,32 +50,22 @@ namespace ECommerce.Models
 
         public void AddLineItem(Item item)
         {
-            Items.Append(item);
+            var existingItemWithSameProduct = Items.FirstOrDefault(i => i.Product.Title == item.Product.Title);
+            if (existingItemWithSameProduct != null)
+            {
+                existingItemWithSameProduct.SetQuantity(item.Quantity + existingItemWithSameProduct.Quantity);
+                existingItemWithSameProduct.SetTotalDiscountedItemAmount(item.TotalDiscountedItemAmount + existingItemWithSameProduct.TotalDiscountedItemAmount);
+                existingItemWithSameProduct.SetTotalItemAmount(item.TotalItemAmount + existingItemWithSameProduct.TotalItemAmount);
+            }
+            else
+            {
+                Items.Add(item);
+            }
         }
 
-        private void SetCouponDiscountAmount(decimal couponDiscountAmount)
+        public void SetCouponDiscountAmount(decimal couponDiscountAmount)
         {
             CouponDiscountAmount = couponDiscountAmount;
-        }
-    }
-
-    class Item
-    {
-        public Item(Product product, int quantity, decimal totalItemAmount)
-        {
-            Product = product;
-            Quantity = quantity;
-            TotalItemAmount = totalItemAmount;
-        }
-
-        public Product Product { get; set; }
-        public int Quantity { get; set; }
-        public decimal TotalItemAmount { get; private set; }
-        public decimal TotalDiscountedItemAmount { get; private set; }
-
-        public void SetTotalDiscountedItemAmount(decimal discountedAmount)
-        {
-            TotalDiscountedItemAmount = discountedAmount;
         }
     }
 }

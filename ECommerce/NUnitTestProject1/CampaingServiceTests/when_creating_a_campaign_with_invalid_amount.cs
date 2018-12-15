@@ -49,7 +49,7 @@ namespace ECommerce.UnitTests.CampaingServiceTests
 
         private void SetUpMocks()
         {
-            categoryService.Setup(c => c.CategoryTitleExists(categoryTitle))
+            categoryService.Setup(c => c.CategoryExists(categoryTitle))
                 .Returns(true);
 
             productWithHigerPriceThanDiscountAmount = new Product(1010, "someTitle", categoryTitle);

@@ -12,6 +12,11 @@ namespace ECommerce.Persistence
             return this.Where(c => c.CategoryTitle == title);
         }
 
+        public IEnumerable<Campaign> GetCampaignsByCategoryTitleAndMinimumQuantity(string categoryTitle, int minQty)
+        {
+            return this.Where(c => c.CategoryTitle == categoryTitle && c.MinItemQty <= minQty);
+        }
+
         public void CreateCampaign(Campaign campaign)
         {
             this.Add(campaign);

@@ -2,7 +2,7 @@
 
 namespace ECommerce.Services
 {
-    interface IDeliveryCostCalculatorService
+    public interface IDeliveryCostCalculatorService
     {
         decimal CostPerDelivery { get; set; }
         decimal CostPerProduct { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.Models
 {
-    class Coupon
+    public class Coupon
     {
         public Coupon(decimal minCartAmount, decimal amount, DiscountType type, CouponStatus status)
         {
@@ -22,7 +22,7 @@
         public CouponStatus Status{ get; private set; }
     }
 
-    enum CouponStatus
+    public enum CouponStatus
     {
         Active,
         InUse,

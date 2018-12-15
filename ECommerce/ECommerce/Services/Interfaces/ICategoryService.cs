@@ -7,6 +7,6 @@ namespace ECommerce.Services.Interfaces
     {
         Category GetCategoryByTitle(string title);
         void CreateCategory(string title, IEnumerable<string> parentCategories = null);
-        bool CategoryTitleExists(string title);
+        bool CategoryExists(string title);
     }
 }

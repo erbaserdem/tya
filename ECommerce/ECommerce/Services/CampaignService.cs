@@ -31,9 +31,14 @@ namespace ECommerce.Services
             return campaignRepo.GetCampaignsByCategoryTitle(categoryTitle);
         }
 
+        public IEnumerable<Campaign> GetCampaignsByCategoryTitleAndMinimumQuantity(string categoryTitle, int minQty)
+        {
+            return campaignRepo.GetCampaignsByCategoryTitleAndMinimumQuantity(categoryTitle, minQty);
+        }
+
         private void EnsureCampaignIsValid(string categoryTitle, decimal amount, int minItemCount, DiscountType type)
         {
-            if (!categoryService.CategoryTitleExists(categoryTitle))
+            if (!categoryService.CategoryExists(categoryTitle))
             {
                 throw new Exception($"Category with title: {categoryTitle} does not exists");
             }

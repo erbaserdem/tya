@@ -7,6 +7,7 @@ namespace ECommerce.Services.Interfaces
     {
         void CreateCampaign(string categoryTitle, decimal amount, int minItemCount, DiscountType type);
         IEnumerable<Campaign> GetCampaignsByCategoryTitle(string categoryTitle);
+        IEnumerable<Campaign> GetCampaignsByCategoryTitleAndMinimumQuantity(string categoryTitle, int minQty);
 
         //should it prevent duplicate campaign creation??
         //bool CampaignExists(string categoryTitle, int minItemCount);
