@@ -16,7 +16,6 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
         protected readonly Mock<IDeliveryCostCalculatorService> deliveryCostCalculatorService = new Mock<IDeliveryCostCalculatorService>();
         protected readonly Mock<ICampaignService> campaignService = new Mock<ICampaignService>();
         protected Product productToAddCart;
-        protected ShoppingCart cart = new ShoppingCart();
         protected ShoppingCartService cartService;
         protected Campaign rateTypeCampaign, amountTypeCampaign;
         protected double rateTypeDiscountAmount = 15, amountTypeDiscountAmount = 15;

@@ -22,39 +22,17 @@ namespace ECommerce
                 .AddSingleton<ICategoryService, CategoryService>()
                 .AddSingleton<IProductService, ProductService>()
                 .AddSingleton<IShoppingCartService, ShoppingCartService>()
+                .AddSingleton<ICouponService, CouponService>()
+                .AddSingleton<InputProcessor>()
                 .AddSingleton<IDeliveryCostCalculatorService, DeliveryCostCalculatorService>(x =>
                     new DeliveryCostCalculatorService(costPerDelivery,
                         costPerProduct,
                         fixedCost))
                 .BuildServiceProvider();
 
+            var ip = serviceProvider.GetService<InputProcessor>();
+            ip.StartProcessing();
 
-            var campaignService = serviceProvider.GetService<ICampaignService>();
-            var categoryService = serviceProvider.GetService<ICategoryService>();
-            var productService = serviceProvider.GetService<IProductService>();
-            var cartService = serviceProvider.GetService<IShoppingCartService>();
-
-
-            Coupon coupon = new Coupon(1000, 5, DiscountType.Rate);
-            categoryService.CreateCategory("EVERYTHING");
-            categoryService.CreateCategory("NUTS", "EVERYTHING");
-            categoryService.CreateCategory("NORMALNUTS",  "NUTS" );
-            categoryService.CreateCategory("FANCYNUTS", "NUTS" );
-            categoryService.CreateCategory("WEIRDNUTS", "NUTS" );
-            productService.CreateProduct(245, "ALMOND", "NORMALNUTS");
-            productService.CreateProduct(244, "CANDLENUT", "FANCYNUTS");
-            productService.CreateProduct(243, "MONGONGONUT", "WEIRDNUTS");
-            productService.CreateProduct(242, "CHESTNUT", "WEIRDNUTS");
-            campaignService.CreateCampaign("EVERYTHING", 20, 3, DiscountType.Amount);
-            ShoppingCart cart = new ShoppingCart();
-            cartService.AddItemToCart(cart, "ALMOND", 5);
-            cartService.AddItemToCart(cart, "CANDLENUT", 5);
-            cartService.AddItemToCart(cart, "MONGONGONUT", 5);
-            cartService.AddItemToCart(cart, "CHESTNUT", 5);
-            cartService.ApplyOrUpdateCampaignsToCart(cart);
-            cartService.ApplyCouponToCart(cart, coupon);
-            cartService.SetOrUpdateDeliveryCost(cart);
-            Console.WriteLine(cartService.GetCartInfo(cart));
         }
     }
 }

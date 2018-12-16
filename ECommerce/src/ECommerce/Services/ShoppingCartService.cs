@@ -10,15 +10,17 @@ namespace ECommerce.Services
         private IProductService ProductService;
         private ICampaignService CampaignService;
         private IDeliveryCostCalculatorService DeliveryCostCalculatorService;
+        private ShoppingCart cart;
 
         public ShoppingCartService(IProductService productService, IDeliveryCostCalculatorService deliveryCostCalculatorService, ICampaignService campaignService)
         {
             ProductService = productService;
             DeliveryCostCalculatorService = deliveryCostCalculatorService;
             CampaignService = campaignService;
+            cart = new ShoppingCart();
         }
 
-        public void ApplyOrUpdateCampaignsToCart(ShoppingCart cart)
+        public void ApplyOrUpdateCampaignsToCart()
         {
             foreach (var cartItem in cart.Items)
             {
@@ -47,7 +49,7 @@ namespace ECommerce.Services
                 : amountTypeDiscountAmount;
         }
 
-        public void ApplyCouponToCart(ShoppingCart cart, Coupon coupon)
+        public void ApplyCouponToCart(Coupon coupon)
         {
             if (coupon.Status != CouponStatus.Active)
             {
@@ -70,14 +72,14 @@ namespace ECommerce.Services
         }
 
 
-        public void SetOrUpdateDeliveryCost(ShoppingCart cart)
+        public void SetOrUpdateDeliveryCost()
         {
             var deliveryCost = DeliveryCostCalculatorService.CalculateDeliveryCost(cart);
             cart.SetDeliveryCost(deliveryCost);
         }
 
 
-        public void AddItemToCart(ShoppingCart cart, string productTitle, int quantity)
+        public void AddItemToCart(string productTitle, int quantity)
         {
             if (quantity <= 0)
             {
@@ -93,17 +95,23 @@ namespace ECommerce.Services
             cart.AddLineItem(new Item(product, quantity, quantity * product.Price));
         }
 
-        private void UpdateCart(ShoppingCart cart)
+        private void UpdateCart()
         {
             var couponDiscountAmount = cart.GetCouponDiscount();
             cart.SetCouponDiscountAmount(0);
-            ApplyOrUpdateCampaignsToCart(cart);
+            ApplyOrUpdateCampaignsToCart();
             cart.SetCouponDiscountAmount(couponDiscountAmount);
-            SetOrUpdateDeliveryCost(cart);
+            SetOrUpdateDeliveryCost();
         }
 
-        public string GetCartInfo(ShoppingCart cart)
+        public string GetCartInfo()
         {
+            if (!cart.Items.Any())
+            {
+                return "Your cart is empty please add items using the command line. If you dont know how to do it you can use pleaseHelp command";
+            }
+
+            UpdateCart();
             string infoString = "";
             var itemsGroupedByCategory = cart.Items.GroupBy(i => i.Product.CategoryTitle);
             foreach (var items in itemsGroupedByCategory)
@@ -131,6 +139,11 @@ namespace ECommerce.Services
 
 
             return infoString;
+        }
+
+        public ShoppingCart GetCart()
+        {
+            return cart;
         }
     }
 }

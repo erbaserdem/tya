@@ -18,6 +18,11 @@ namespace ECommerce.Services
         public double FixedCost { get; set; }
         public double CalculateDeliveryCost(ShoppingCart cart)
         {
+            if (!cart.Items.Any())
+            {
+                return 0;
+            }
+
             var numberOfDeliveries = cart.Items.Select(i => i.Product.CategoryTitle).Distinct().Count();
             var numberOfProducts = cart.Items.Select(i => i.Product.Title).Distinct().Count();
 

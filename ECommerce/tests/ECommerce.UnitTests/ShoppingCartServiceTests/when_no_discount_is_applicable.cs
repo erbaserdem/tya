@@ -19,14 +19,15 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
             amountTypeDiscountAmount = 1;
             rateTypeDiscountAmount = 10;
             base.Setup();
-            cartService.AddItemToCart(cart, productToAddCart.Title, Quantity);
-            cartService.ApplyOrUpdateCampaignsToCart(cart);
+            cartService.AddItemToCart(productToAddCart.Title, Quantity);
+            cartService.ApplyOrUpdateCampaignsToCart();
         }
 
 
         [Test]
         public void it_should_apply_parent_categorys_discount_if_none_defined_for_its_own()
         {
+            var cart = cartService.GetCart();
             var cartItem = cart.Items.First();
             cartItem.Product.Title.Should().Be(productToAddCart.Title);
             cartItem.TotalItemAmount.Should().Be(productToAddCart.Price * Quantity);

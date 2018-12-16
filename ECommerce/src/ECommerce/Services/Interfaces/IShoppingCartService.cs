@@ -6,12 +6,12 @@ namespace ECommerce.Services.Interfaces
 {
     public interface IShoppingCartService
     {
-        void ApplyOrUpdateCampaignsToCart(ShoppingCart cart);
+        void ApplyOrUpdateCampaignsToCart();
 
-        void ApplyCouponToCart(ShoppingCart cart, Coupon coupon);
+        void ApplyCouponToCart(Coupon coupon);
 
-        void AddItemToCart(ShoppingCart cart, string productTitle, int quantity);
-        void SetOrUpdateDeliveryCost(ShoppingCart cart);
-        string GetCartInfo(ShoppingCart cart);
+        void AddItemToCart(string productTitle, int quantity);
+        void SetOrUpdateDeliveryCost();
+        string GetCartInfo();
     }
 }
