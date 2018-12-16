@@ -32,19 +32,27 @@ namespace ECommerce
             var categoryService = serviceProvider.GetService<ICategoryService>();
             var productService = serviceProvider.GetService<IProductService>();
             var cartService = serviceProvider.GetService<IShoppingCartService>();
-            var deliveryCostCalculator = serviceProvider.GetService<IDeliveryCostCalculatorService>();
 
 
             Coupon coupon = new Coupon(1000, 5, DiscountType.Rate);
-            categoryService.CreateCategory("aaa");
-            productService.CreateProduct(245, "ALMOND","aaa");
-            campaignService.CreateCampaign("aaa",20,3,DiscountType.Amount);
+            categoryService.CreateCategory("NORMALNUTS");
+            categoryService.CreateCategory("FANCYNUTS");
+            categoryService.CreateCategory("WEIRDNUTS");
+            productService.CreateProduct(245, "ALMOND", "NORMALNUTS");
+            productService.CreateProduct(244, "CANDLENUT", "FANCYNUTS");
+            productService.CreateProduct(243, "MONGONGONUT", "WEIRDNUTS");
+            productService.CreateProduct(242, "CHESTNUT", "WEIRDNUTS");
+            campaignService.CreateCampaign("NORMALNUTS", 20,3,DiscountType.Amount);
+            campaignService.CreateCampaign("WEIRDNUTS", 20,3,DiscountType.Amount);
             ShoppingCart cart = new ShoppingCart();
             cartService.AddItemToCart(cart, "ALMOND", 5);
+            cartService.AddItemToCart(cart, "CANDLENUT", 5);
+            cartService.AddItemToCart(cart, "MONGONGONUT", 5);
+            cartService.AddItemToCart(cart, "CHESTNUT", 5);
             cartService.ApplyOrUpdateCampaignsToCart(cart);
             cartService.ApplyCouponToCart(cart, coupon);
             cartService.SetOrUpdateDeliveryCost(cart);
-            
+            Console.WriteLine(cartService.GetCartInfo(cart));
         }
     }
 }

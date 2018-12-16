@@ -5,16 +5,9 @@ namespace ECommerce.Models
 {
     public class ShoppingCart
     {
-        public ShoppingCart(List<Item> items, double couponDiscountAmount)
-        {
-            Items = items;
-            CouponDiscountAmount = couponDiscountAmount;
-        }
-
         public ShoppingCart()
         {
             Items = new List<Item>();
-            CouponDiscountAmount = 0;
         }
 
         public List<Item> Items { get; private set; }
@@ -46,6 +39,7 @@ namespace ECommerce.Models
                 return c;
             }
         }
+
         public double CouponDiscountAmount { get; private set; }
 
         public void AddLineItem(Item item)
@@ -73,6 +67,26 @@ namespace ECommerce.Models
         public void SetDeliveryCost(double deliveryCost)
         {
             DeliveryCost = deliveryCost;
+        }
+
+        public double GetCouponDiscount()
+        {
+            return CouponDiscountAmount;
+        }
+
+        public double GetCampaignDiscount()
+        {
+            return ItemsTotalAmount-ItemsTotalDiscountedAmount;
+        }
+
+        public double GetTotalCartAmountAfterDiscounts()
+        {
+            return ItemsTotalDiscountedAmount - CouponDiscountAmount;
+        }
+
+        public double GetDeliveryCost()
+        {
+            return DeliveryCost;
         }
     }
 }

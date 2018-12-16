@@ -12,5 +12,6 @@ namespace ECommerce.Services.Interfaces
 
         void AddItemToCart(ShoppingCart cart, string productTitle, int quantity);
         void SetOrUpdateDeliveryCost(ShoppingCart cart);
+        string GetCartInfo(ShoppingCart cart);
     }
 }

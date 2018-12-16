@@ -91,7 +91,46 @@ namespace ECommerce.Services
             }
 
             cart.AddLineItem(new Item(product, quantity, quantity * product.Price));
+            UpdateCart(cart);
+        }
+
+        private void UpdateCart(ShoppingCart cart)
+        {
+            var couponDiscountAmount = cart.GetCouponDiscount();
+            cart.SetCouponDiscountAmount(0);
             ApplyOrUpdateCampaignsToCart(cart);
+            cart.SetCouponDiscountAmount(couponDiscountAmount);
+            SetOrUpdateDeliveryCost(cart);
+        }
+
+        public string GetCartInfo(ShoppingCart cart)
+        {
+            string infoString = "";
+            var itemsGroupedByCategory = cart.Items.GroupBy(i => i.Product.CategoryTitle);
+            foreach (var items in itemsGroupedByCategory)
+            {
+                infoString+= "Category: " + items.Key;
+                infoString+= "\n";
+                foreach (var item in items)
+                {
+                    infoString += "Product Name:  " + item.Product.Title + "\t ";
+                    infoString += "Quantity: " + item.Quantity + "\t ";
+                    infoString += "Unit Price: " + item.Product.Price + "\t ";
+                    infoString += "Total: " + item.TotalItemAmount + "\t ";
+                    infoString += Math.Abs(item.TotalItemAmount - item.TotalDiscountedItemAmount) < 0.1 ? "": "Total Discounted Amount: " + item.TotalDiscountedItemAmount + "\t ";
+                    infoString += "\n";
+                }
+            }
+            infoString += "\n";
+            infoString += "Total Campaign Discount: " + cart.GetCouponDiscount() + "\t ";
+            infoString += "Coupon Discount: " + cart.GetCouponDiscount() + "\t ";
+            infoString += "\n";
+            infoString += "Delivery Cost: " + cart.GetDeliveryCost() + "\t ";
+            infoString += "Total Amount: " + (cart.GetTotalCartAmountAfterDiscounts() + cart.GetDeliveryCost()) + "\t ";
+            infoString += "Total Amount With Delivery Cost: " + (cart.GetTotalCartAmountAfterDiscounts() + cart.GetDeliveryCost()) + "\t ";
+
+
+            return infoString;
         }
     }
 }
