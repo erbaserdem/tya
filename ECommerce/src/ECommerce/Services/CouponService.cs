@@ -4,16 +4,9 @@ using ECommerce.Services.Interfaces;
 
 namespace ECommerce.Services
 {
-    class CouponService : ICouponService
+    public class CouponService : ICouponService
     {
-        private IProductService ProductService;
-
-        public CouponService(IProductService productService)
-        {
-            ProductService = productService;
-        }
-
-        public Coupon CreateCampaign(double minAmount, double amount, DiscountType type)
+        public Coupon CreateCoupon(double minAmount, double amount, DiscountType type)
         {
             EnsureCouponIsValid(minAmount, amount, type);
             return new Coupon(minAmount, amount, type);
@@ -22,6 +15,10 @@ namespace ECommerce.Services
 
         private void EnsureCouponIsValid( double minAmount, double amount, DiscountType type)
         {
+            if (amount <= 0)
+            {
+                throw new Exception($"Discount amount can not be negatice regardless of type");
+            }
             if (type == DiscountType.Rate && (amount >= 100 || amount <= 0))
             {
                 throw new Exception($"Discount amount should be between 0 and 100 for rate typed discounts");

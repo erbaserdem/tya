@@ -107,7 +107,7 @@ namespace ECommerce
                 double minAmount = double.Parse(input[1]);
                 double amount = double.Parse(input[2]);
                 DiscountType type = (DiscountType)Int32.Parse(input[3]);
-                var coupon = CouponService.CreateCampaign(minAmount, amount, type);
+                var coupon = CouponService.CreateCoupon(minAmount, amount, type);
                 ShoppingCartService.ApplyCouponToCart(coupon);
             }
             catch (Exception e)

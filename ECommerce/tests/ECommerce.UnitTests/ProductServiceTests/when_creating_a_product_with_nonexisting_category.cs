@@ -30,7 +30,7 @@ namespace ECommerce.UnitTests.ProductServiceTests
         }
 
         [Test]
-        public void it_should_throw_exception_about_category_existency()
+        public void it_should_not_create_product_due_to_category_being_nonexistent()
         {
             action.Should().Throw<Exception>();
         }

@@ -4,8 +4,8 @@ using ECommerce.Models;
 
 namespace ECommerce.Services.Interfaces
 {
-    interface ICouponService
+    public interface ICouponService
     {
-        Coupon CreateCampaign(double minAmount, double amount, DiscountType type);
+        Coupon CreateCoupon(double minAmount, double amount, DiscountType type);
     }
 }

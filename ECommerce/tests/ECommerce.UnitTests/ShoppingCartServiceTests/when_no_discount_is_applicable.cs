@@ -11,7 +11,7 @@ using NUnit.Framework;
 
 namespace ECommerce.UnitTests.ShoppingCartServiceTests
 {
-    public class when_no_discount_is_applicable : TestBase
+    public class when_no_campaign_is_applicable : TestBase
     {
         [OneTimeSetUp]
         public override  void Setup()
@@ -25,7 +25,7 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
 
 
         [Test]
-        public void it_should_apply_parent_categorys_discount_if_none_defined_for_its_own()
+        public void it_should_not_change_carts_discounted_amount_if_no_campaign_is_applied()
         {
             var cart = cartService.GetCart();
             var cartItem = cart.Items.First();

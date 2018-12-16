@@ -37,7 +37,7 @@ namespace ECommerce.UnitTests.CampaingServiceTests
         }
 
         [Test]
-        public void it_should_create_campaign_with_given_parameters()
+        public void it_should_return_parent_category_campaign_if_none_fourn_for_main_category()
         {
             var campaigns = campaignService.GetEligibleCampaignsByCategoryTitleAndMinimumQuantity(ChildCategoryLevel2,discountMinItemCount+5);
             campaigns.Count().Should().Be(1);

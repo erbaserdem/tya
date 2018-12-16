@@ -30,8 +30,6 @@ namespace ECommerce.UnitTests.CampaingServiceTests
         {
             SetUpMocks();
             campaignService = new CampaignService(campaignRepo, categoryService.Object, productService.Object);
-
-
         }
 
         [TestCase(100)]

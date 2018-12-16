@@ -54,7 +54,12 @@ namespace ECommerce.Services
             {
                 throw new Exception($"Category with title: {categoryTitle} does not exists");
             }
-            if (type == DiscountType.Rate && (amount>=100 || amount<=0))
+
+            if (amount<=0)
+            {
+                throw new Exception($"Discount amount can not be negative regardless of type");
+            }
+            if (type == DiscountType.Rate && (amount>=100))
             {
                 throw new Exception($"Discount amount should be between 0 and 100 for rate typed discounts");
             }

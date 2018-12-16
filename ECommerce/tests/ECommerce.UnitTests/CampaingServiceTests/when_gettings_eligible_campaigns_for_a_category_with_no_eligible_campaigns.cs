@@ -25,7 +25,7 @@ namespace ECommerce.UnitTests.CampaingServiceTests
         private Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
         private Mock<IProductService> productService= new Mock<IProductService>();
         private ICampaignService campaignService;
-        private Product productWithHigerPriceThanDiscountAmount;
+        private Product product;
 
 
 
@@ -38,7 +38,7 @@ namespace ECommerce.UnitTests.CampaingServiceTests
         }
 
         [Test]
-        public void it_should_create_campaign_with_given_parameters()
+        public void it_should_not_be_able_to_find_any_categories_for_given_product()
         {
             var campaigns = campaignService.GetEligibleCampaignsByCategoryTitleAndMinimumQuantity(ChildCategoryLevel2,discountMinItemCount+5);
             campaigns.Should().BeNull();
@@ -54,9 +54,9 @@ namespace ECommerce.UnitTests.CampaingServiceTests
             categoryService.Setup(a => a.GetParentCategoryTitle(ChildCategoryLevel2)).Returns(ChildCategoryLevel1);
             categoryService.Setup(a => a.GetParentCategoryTitle(ChildCategoryLevel1)).Returns(ParentCategory);
 
-            productWithHigerPriceThanDiscountAmount = new Product(discountAmount+10, "someTitle", ParentCategory);
+            product = new Product(discountAmount+10, "someTitle", ParentCategory);
 
-            productService.Setup(p => p.GetProductsByCategoryTitle(ParentCategory)).Returns(new List<Product> { productWithHigerPriceThanDiscountAmount });
+            productService.Setup(p => p.GetProductsByCategoryTitle(ParentCategory)).Returns(new List<Product> { product });
         }
 
     }
