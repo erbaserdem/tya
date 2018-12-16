@@ -1,7 +1,7 @@
-﻿using ECommerce.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ECommerce.Models;
 
-namespace ECommerce.Services
+namespace ECommerce.Services.Interfaces
 {
     public interface IProductService
     {

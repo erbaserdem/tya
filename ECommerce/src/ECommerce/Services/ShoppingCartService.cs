@@ -18,7 +18,7 @@ namespace ECommerce.Services
             CampaignService = campaignService;
         }
 
-        public void ApplyDiscountsToCart(ShoppingCart cart)
+        public void ApplyOrUpdateCampaignsToCart(ShoppingCart cart)
         {
             foreach (var cartItem in cart.Items)
             {
@@ -40,7 +40,7 @@ namespace ECommerce.Services
             var bestAmountTypeCampaignAmount = amountTypeCampaigns.Any() ? amountTypeCampaigns.Max(c => c.Amount) : 0;
 
             var rateTypeDiscountAmount = cartItemTotalItemAmount * bestRateTypeCampaignAmount / 100;
-            var amountTypeDiscountAmount = bestAmountTypeCampaignAmount;
+            var amountTypeDiscountAmount = bestAmountTypeCampaignAmount * cartItemQuantity;
 
             return rateTypeDiscountAmount > amountTypeDiscountAmount
                 ? rateTypeDiscountAmount
@@ -51,24 +51,33 @@ namespace ECommerce.Services
         {
             if (coupon.Status != CouponStatus.Active)
             {
-                throw new Exception($"Coupon is already used or it is in use by this or another cart");
+                throw new Exception("Coupon is already used or it is in use by this or another cart");
             }
             if (coupon.MinCartAmount > cart.ItemsTotalAmount)
             {
-                throw new Exception($"Coupon couldnt be applied to cart since cart does not meet the minimum amount criteria");
+                throw new Exception("Coupon couldnt be applied to cart since cart does not meet the minimum amount criteria");
             }
 
             var discountAmount = coupon.Type == DiscountType.Amount
                 ? coupon.Amount
                 : coupon.Amount * cart.ItemsTotalDiscountedAmount / 100;
-            cart.SetCouponDiscountAmount(cart.ItemsTotalDiscountedAmount-discountAmount);
+            coupon.SetStatusInUse();
+            cart.SetCouponDiscountAmount(discountAmount);
         }
+
+
+        public void SetOrUpdateDeliveryCost(ShoppingCart cart)
+        {
+            var deliveryCost = DeliveryCostCalculatorService.CalculateDeliveryCost(cart);
+            cart.SetDeliveryCost(deliveryCost);
+        }
+
 
         public void AddItemToCart(ShoppingCart cart, string productTitle, int quantity)
         {
             if (quantity <= 0)
             {
-                throw new Exception($"Quantity of the product to add to cart must be positive number");
+                throw new Exception("Quantity of the product to add to cart must be positive number");
             }
 
             var product = ProductService.GetProductByTitle(productTitle);
@@ -78,6 +87,7 @@ namespace ECommerce.Services
             }
 
             cart.AddLineItem(new Item(product, quantity, quantity * product.Price));
+            ApplyOrUpdateCampaignsToCart(cart);
         }
     }
 }

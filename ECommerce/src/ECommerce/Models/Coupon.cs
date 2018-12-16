@@ -2,17 +2,17 @@
 {
     public class Coupon
     {
-        public Coupon(decimal minCartAmount, decimal amount, DiscountType type, CouponStatus status)
+        public Coupon(decimal minCartAmount, decimal amount, DiscountType type)
         {
             MinCartAmount = minCartAmount;
             Amount = amount;
             Type = type;
-            Status = status;
+            Status = CouponStatus.Active;
         }
 
-        private void SetStatus(CouponStatus status)
+        public void SetStatusInUse()
         {
-            Status = status;
+            Status = CouponStatus.InUse;
         }
 
 

@@ -1,13 +1,9 @@
 ﻿using ECommerce.Models;
 
-namespace ECommerce.Services
+namespace ECommerce.Services.Interfaces
 {
     public interface IDeliveryCostCalculatorService
     {
-        decimal CostPerDelivery { get; set; }
-        decimal CostPerProduct { get; set; }
-        decimal FixedCost { get; set; }
-
-        double CalculateDeliveryCost(ShoppingCart cart);
+        decimal CalculateDeliveryCost(ShoppingCart cart);
     }
 }

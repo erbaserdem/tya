@@ -15,8 +15,6 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
         public override void Setup()
         {
             base.Setup();
-            productToAddCart = new Product(50m, "productTitle", "categoryTitle");
-            productService.Setup(p => p.GetProductByTitle(productToAddCart.Title)).Returns(productToAddCart);
             cartService.AddItemToCart(cart, productToAddCart.Title, quantity);
             cartService.AddItemToCart(cart, productToAddCart.Title, quantity);
         }

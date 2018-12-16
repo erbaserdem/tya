@@ -67,5 +67,12 @@ namespace ECommerce.Models
         {
             CouponDiscountAmount = couponDiscountAmount;
         }
+
+        public decimal DeliveryCost { get; private set; }
+
+        public void SetDeliveryCost(decimal deliveryCost)
+        {
+            DeliveryCost = deliveryCost;
+        }
     }
 }
