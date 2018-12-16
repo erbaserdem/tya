@@ -6,7 +6,8 @@ namespace ECommerce.Services.Interfaces
     public interface ICategoryService
     {
         Category GetCategoryByTitle(string title);
-        void CreateCategory(string title, IEnumerable<string> parentCategories = null);
+        string GetParentCategoryTitle(string childCategoryTitle);
+        void CreateCategory(string title, string parentCategories = null);
         bool CategoryExists(string title);
     }
 }

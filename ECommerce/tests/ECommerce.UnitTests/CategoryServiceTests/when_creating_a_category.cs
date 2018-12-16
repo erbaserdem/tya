@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ECommerce.Models;
 using ECommerce.Persistence;
 using ECommerce.Services;
 using FluentAssertions;
@@ -8,11 +9,11 @@ namespace ECommerce.UnitTests.CategoryServiceTests
 {
     public class when_creating_a_category
     {
-        private IEnumerable<string> parentCategories = new List<string>{"parent1", "parent2"};
+        private string parentCategory = "parent";
         private string categoryTitle = "CategoryTitle";
         private CategoryService categoryService;
         private InMemoryCategoryRepo categoryRepo;
-        
+
 
         [OneTimeSetUp]
         public void Setup()
@@ -20,7 +21,7 @@ namespace ECommerce.UnitTests.CategoryServiceTests
             categoryRepo = new InMemoryCategoryRepo();
             SetUpParentCategories();
             categoryService = new CategoryService(categoryRepo);
-            categoryService.CreateCategory(categoryTitle, parentCategories);
+            categoryService.CreateCategory(categoryTitle, parentCategory);
         }
 
         [Test]
@@ -28,18 +29,12 @@ namespace ECommerce.UnitTests.CategoryServiceTests
         {
             var category = categoryService.GetCategoryByTitle(categoryTitle);
             category.Title.Should().Be(categoryTitle);
-            foreach (var parentCategory in parentCategories)
-            {
-                category.ParentCategories.Should().Contain(parentCategory);
-            }
+            category.ParentCategory.Should().Contain(parentCategory);
         }
 
         private void SetUpParentCategories()
         {
-            foreach (var parentCategory in parentCategories)
-            {
-                categoryRepo.Add(new Models.Category(parentCategory, new List<string>()));
-            }
+            categoryRepo.Add(new Category(parentCategory, null));
         }
     }
 }

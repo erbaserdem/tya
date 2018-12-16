@@ -9,7 +9,7 @@ namespace ECommerce.UnitTests.CategoryServiceTests
 {
     public class when_creating_a_category_with_nonexisting_parent_categories
     {
-        private IEnumerable<string> parentCategories = new List<string>{"parent3", "parent5"};
+        private string parentCategory = "parent3";
         private string categoryTitle = "CategoryTitle";
         private CategoryService categoryService;
         private InMemoryCategoryRepo categoryRepo;
@@ -23,7 +23,7 @@ namespace ECommerce.UnitTests.CategoryServiceTests
             categoryService = new CategoryService(categoryRepo);
             action = () =>
             {
-                categoryService.CreateCategory(categoryTitle, parentCategories);
+                categoryService.CreateCategory(categoryTitle, parentCategory);
             };
         }
 

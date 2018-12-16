@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ECommerce.Models;
 using ECommerce.Persistence;
 using ECommerce.Persistence.Interfaces;
@@ -35,15 +36,16 @@ namespace ECommerce
 
 
             Coupon coupon = new Coupon(1000, 5, DiscountType.Rate);
-            categoryService.CreateCategory("NORMALNUTS");
-            categoryService.CreateCategory("FANCYNUTS");
-            categoryService.CreateCategory("WEIRDNUTS");
+            categoryService.CreateCategory("EVERYTHING");
+            categoryService.CreateCategory("NUTS", "EVERYTHING");
+            categoryService.CreateCategory("NORMALNUTS",  "NUTS" );
+            categoryService.CreateCategory("FANCYNUTS", "NUTS" );
+            categoryService.CreateCategory("WEIRDNUTS", "NUTS" );
             productService.CreateProduct(245, "ALMOND", "NORMALNUTS");
             productService.CreateProduct(244, "CANDLENUT", "FANCYNUTS");
             productService.CreateProduct(243, "MONGONGONUT", "WEIRDNUTS");
             productService.CreateProduct(242, "CHESTNUT", "WEIRDNUTS");
-            campaignService.CreateCampaign("NORMALNUTS", 20,3,DiscountType.Amount);
-            campaignService.CreateCampaign("WEIRDNUTS", 20,3,DiscountType.Amount);
+            campaignService.CreateCampaign("EVERYTHING", 20, 3, DiscountType.Amount);
             ShoppingCart cart = new ShoppingCart();
             cartService.AddItemToCart(cart, "ALMOND", 5);
             cartService.AddItemToCart(cart, "CANDLENUT", 5);

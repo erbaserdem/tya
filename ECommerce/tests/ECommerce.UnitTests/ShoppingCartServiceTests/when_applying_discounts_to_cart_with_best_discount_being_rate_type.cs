@@ -18,7 +18,7 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
             amountTypeDiscountAmount = 1;
             rateTypeDiscountAmount = 10;
             base.Setup();
-            cartService.AddItemToCart(cart, productToAddCart.Title, quantity);
+            cartService.AddItemToCart(cart, productToAddCart.Title, Quantity);
             cartService.ApplyOrUpdateCampaignsToCart(cart);
         }
 
@@ -28,7 +28,7 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
         {
             var cartItem = cart.Items.First();
             cartItem.Product.Title.Should().Be(productToAddCart.Title);
-            cartItem.TotalItemAmount.Should().Be(productToAddCart.Price * quantity);
+            cartItem.TotalItemAmount.Should().Be(productToAddCart.Price * Quantity);
 
             cart.ItemsTotalDiscountedAmount.Should().BeLessThan(cart.ItemsTotalAmount);
             cart.ItemsTotalDiscountedAmount.Should().Be(cart.ItemsTotalAmount * (100 - rateTypeDiscountAmount) / 100);

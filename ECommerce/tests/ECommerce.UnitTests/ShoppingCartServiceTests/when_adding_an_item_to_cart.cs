@@ -15,7 +15,7 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
         public override void Setup()
         {
             base.Setup();
-            cartService.AddItemToCart(cart, productToAddCart.Title, quantity);
+            cartService.AddItemToCart(cart, productToAddCart.Title, Quantity);
         }
 
 
@@ -24,7 +24,7 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
         {
             var cartItem = cart.Items.First();
             cartItem.Product.Title.Should().Be(productToAddCart.Title);
-            cartItem.TotalItemAmount.Should().Be(productToAddCart.Price * quantity);
+            cartItem.TotalItemAmount.Should().Be(productToAddCart.Price * Quantity);
         }
 
     }

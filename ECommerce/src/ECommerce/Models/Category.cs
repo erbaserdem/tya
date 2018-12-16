@@ -4,13 +4,13 @@ namespace ECommerce.Models
 {
     public class Category
     {
-        public Category(string title, IEnumerable<string> parentCategories)
+        public Category(string title, string parentCategory)
         {
             Title = title;
-            ParentCategories = parentCategories;
+            ParentCategory = parentCategory;
         }
 
         public string Title { get; private set; }
-        public IEnumerable<string> ParentCategories { get; private set; }
+        public string ParentCategory { get; private set; }
     }
 }

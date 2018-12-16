@@ -31,9 +31,21 @@ namespace ECommerce.Services
             return campaignRepo.GetCampaignsByCategoryTitle(categoryTitle);
         }
 
-        public IEnumerable<Campaign> GetCampaignsByCategoryTitleAndMinimumQuantity(string categoryTitle, int minQty)
+        public IEnumerable<Campaign> GetEligibleCampaignsByCategoryTitleAndMinimumQuantity(string categoryTitle, int minQty)
         {
-            return campaignRepo.GetCampaignsByCategoryTitleAndMinimumQuantity(categoryTitle, minQty);
+            var campaigns = campaignRepo.GetCampaignsByCategoryTitleAndMinimumQuantity(categoryTitle, minQty);
+            if (campaigns.Any())
+            {
+                return campaigns;
+            }
+
+            var parentCategoryTitle = categoryService.GetParentCategoryTitle(categoryTitle);
+            if (parentCategoryTitle == null)
+            {
+                return null;
+            }
+
+            return GetEligibleCampaignsByCategoryTitleAndMinimumQuantity(parentCategoryTitle, minQty);
         }
 
         private void EnsureCampaignIsValid(string categoryTitle, double amount, int minItemCount, DiscountType type)

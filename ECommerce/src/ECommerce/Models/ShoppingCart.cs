@@ -83,6 +83,10 @@ namespace ECommerce.Models
         {
             return ItemsTotalDiscountedAmount - CouponDiscountAmount;
         }
+        public double GetTotalCartAmount()
+        {
+            return ItemsTotalAmount;
+        }
 
         public double GetDeliveryCost()
         {

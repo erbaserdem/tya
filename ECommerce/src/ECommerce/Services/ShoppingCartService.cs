@@ -31,7 +31,7 @@ namespace ECommerce.Services
         private double GetBestPossibleDiscountAmountForItem(string categoryTitle, int cartItemQuantity, double cartItemTotalItemAmount)
         {
             var campaigns =
-                CampaignService.GetCampaignsByCategoryTitleAndMinimumQuantity(categoryTitle, cartItemQuantity);
+                CampaignService.GetEligibleCampaignsByCategoryTitleAndMinimumQuantity(categoryTitle, cartItemQuantity);
             if (campaigns == null) return 0;
 
             var rateTypeCampaigns = campaigns.Where(c => c.Type == DiscountType.Rate);
@@ -91,7 +91,6 @@ namespace ECommerce.Services
             }
 
             cart.AddLineItem(new Item(product, quantity, quantity * product.Price));
-            UpdateCart(cart);
         }
 
         private void UpdateCart(ShoppingCart cart)
@@ -122,11 +121,12 @@ namespace ECommerce.Services
                 }
             }
             infoString += "\n";
-            infoString += "Total Campaign Discount: " + cart.GetCouponDiscount() + "\t ";
+            infoString += "Total Campaign Discount: " + cart.GetCampaignDiscount() + "\t ";
             infoString += "Coupon Discount: " + cart.GetCouponDiscount() + "\t ";
             infoString += "\n";
             infoString += "Delivery Cost: " + cart.GetDeliveryCost() + "\t ";
-            infoString += "Total Amount: " + (cart.GetTotalCartAmountAfterDiscounts() + cart.GetDeliveryCost()) + "\t ";
+            infoString += "Total Amount: " + cart.GetTotalCartAmount() + "\t ";
+            infoString += "Total AmountWithDiscounts: " + cart.GetTotalCartAmountAfterDiscounts() + "\t ";
             infoString += "Total Amount With Delivery Cost: " + (cart.GetTotalCartAmountAfterDiscounts() + cart.GetDeliveryCost()) + "\t ";
 
 
