@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using ShoppingCart.Models;
 using ShoppingCart.Services.Interfaces;
 
@@ -102,8 +103,8 @@ namespace ShoppingCart
         {
             try
             {
-                double minAmount = double.Parse(input[1]);
-                double amount = double.Parse(input[2]);
+                double minAmount = ParseToDouble(input[1]);
+                double amount = ParseToDouble(input[2]);
                 DiscountType type = (DiscountType)Int32.Parse(input[3]);
                 var coupon = CouponService.CreateCoupon(minAmount, amount, type);
                 ShoppingCartService.ApplyCouponToCart(coupon);
@@ -138,7 +139,7 @@ namespace ShoppingCart
             try
             {
                 var categoryTitle = input[1];
-                double amount = double.Parse(input[2]);
+                double amount = ParseToDouble(input[2]);
                 int minItemCount = Int32.Parse(input[3]);
                 DiscountType type = (DiscountType)Int32.Parse(input[4]);
                 CampaignService.CreateCampaign(categoryTitle, amount, minItemCount, type);
@@ -167,7 +168,7 @@ namespace ShoppingCart
         {
             try
             {
-                double price = double.Parse(input[1]);
+                double price = ParseToDouble(input[1]);
                 var title = input[2];
                 var categoryTitle = input[3];
                 ProductService.CreateProduct(price, title, categoryTitle);
@@ -176,6 +177,11 @@ namespace ShoppingCart
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        private double ParseToDouble(string value)
+        {
+            return double.Parse(value, CultureInfo.InvariantCulture);
         }
     }
 }
