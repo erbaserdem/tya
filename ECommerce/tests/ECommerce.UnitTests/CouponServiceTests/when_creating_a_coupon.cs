@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ECommerce.Models;
+﻿using ECommerce.Models;
 using ECommerce.Services;
 using ECommerce.Services.Interfaces;
 using FluentAssertions;
-using Moq;
 using NUnit.Framework;
 
 namespace ECommerce.UnitTests.CouponServiceTests

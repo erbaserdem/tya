@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using ECommerce.Persistence;
 using ECommerce.Services;
 using FluentAssertions;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using ECommerce.Models;
+﻿using ECommerce.Models;
 
 namespace ECommerce.Services.Interfaces
 {

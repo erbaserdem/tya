@@ -1,11 +1,5 @@
-using System.Collections.Generic;
 using System.Linq;
-using ECommerce.Models;
-using ECommerce.Persistence;
-using ECommerce.Services;
-using ECommerce.Services.Interfaces;
 using FluentAssertions;
-using Moq;
 using NUnit.Framework;
 
 namespace ECommerce.UnitTests.ShoppingCartServiceTests

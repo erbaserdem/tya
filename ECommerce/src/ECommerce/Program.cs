@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ECommerce.Models;
-using ECommerce.Persistence;
+﻿using ECommerce.Persistence;
 using ECommerce.Persistence.Interfaces;
 using ECommerce.Services;
 using ECommerce.Services.Interfaces;

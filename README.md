@@ -16,17 +16,15 @@
 
     - ShoppingCart service is responsible for any operation on the cart
 
-    - Campaign, product and category services are responsible for creation of their appropriate components
+    - Campaign, product and category services are responsible for their appropriate components
 
     - Titles are unique for campaigns and products
 
     - Categories can be created with or without a parent category
         - But you can not create a category if you enter a non-existent category as a parent category
 
-    - If a category has a product which has a price of x, a campaign on that specific category which has (x+n)amount and amount type can not be created (This control does not include child category control(it should))
-
-    - You can not create a campaign if you enter a non-existent category as a category
+    - You can not create a campaign if you enter a non-existent category as  category
     
-    - You can not create a product if you enter a non-existent category as a category
+    - You can not create a product if you enter a non-existent category as  category
 
-    - You can not create a category if you enter a non-existent category as a parent category
+    - You can not create a category if you enter a non-existent category as parent category

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ECommerce.Models;
 using ECommerce.Services.Interfaces;
 
@@ -46,7 +44,7 @@ namespace ECommerce
             }
 
             Console.WriteLine("Bye Have A Great Time");
-            Console.ReadKey();
+            Console.ReadLine();
         }
 
         private void ExecuteCommand(string[] input)
