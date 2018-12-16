@@ -27,7 +27,7 @@ namespace ECommerce.Services
             return ProductRepo.GetProductsByCategory(title);
         }
 
-        public void CreateProduct(decimal price, string title, string categoryTitle)
+        public void CreateProduct(double price, string title, string categoryTitle)
         {
             if (!CategoryService.CategoryExists(categoryTitle))
             {

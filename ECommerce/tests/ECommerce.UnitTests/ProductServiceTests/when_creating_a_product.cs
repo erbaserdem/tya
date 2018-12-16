@@ -9,7 +9,7 @@ namespace ECommerce.UnitTests.ProductServiceTests
 {
     public class when_creating_a_product
     {
-        private decimal price = 35m;
+        private double price = 35;
         private string productTitle = "ProductTitle";
         private string categoryTitle = "CategoryTitle";
         private ProductService productService;

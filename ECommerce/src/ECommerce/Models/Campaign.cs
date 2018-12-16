@@ -2,7 +2,7 @@
 {
     public class Campaign
     {
-        public Campaign(string categoryTitle, decimal amount, int minItemQty, DiscountType type)
+        public Campaign(string categoryTitle, double amount, int minItemQty, DiscountType type)
         {
             CategoryTitle = categoryTitle;
             Amount = amount;
@@ -11,7 +11,7 @@
         }
 
         public string CategoryTitle { get; set; }
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
         public int MinItemQty { get; set; }
         public DiscountType Type{ get; set; }
     }

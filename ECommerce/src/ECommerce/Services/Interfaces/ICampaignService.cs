@@ -5,7 +5,7 @@ namespace ECommerce.Services.Interfaces
 {
     public interface ICampaignService
     {
-        void CreateCampaign(string categoryTitle, decimal amount, int minItemCount, DiscountType type);
+        void CreateCampaign(string categoryTitle, double amount, int minItemCount, DiscountType type);
         IEnumerable<Campaign> GetCampaignsByCategoryTitle(string categoryTitle);
         IEnumerable<Campaign> GetCampaignsByCategoryTitleAndMinimumQuantity(string categoryTitle, int minQty);
 

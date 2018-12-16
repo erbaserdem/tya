@@ -4,6 +4,6 @@ namespace ECommerce.Services.Interfaces
 {
     public interface IDeliveryCostCalculatorService
     {
-        decimal CalculateDeliveryCost(ShoppingCart cart);
+        double CalculateDeliveryCost(ShoppingCart cart);
     }
 }

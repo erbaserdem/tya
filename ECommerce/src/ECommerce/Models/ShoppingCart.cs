@@ -5,7 +5,7 @@ namespace ECommerce.Models
 {
     public class ShoppingCart
     {
-        public ShoppingCart(List<Item> items, decimal couponDiscountAmount)
+        public ShoppingCart(List<Item> items, double couponDiscountAmount)
         {
             Items = items;
             CouponDiscountAmount = couponDiscountAmount;
@@ -19,11 +19,11 @@ namespace ECommerce.Models
 
         public List<Item> Items { get; private set; }
 
-        public decimal ItemsTotalAmount
+        public double ItemsTotalAmount
         {
             get
             {
-                decimal c = 0;
+                double c = 0;
                 foreach (var item in Items)
                 {
                     c +=item.TotalItemAmount;
@@ -33,11 +33,11 @@ namespace ECommerce.Models
             }
         }
 
-        public decimal ItemsTotalDiscountedAmount
+        public double ItemsTotalDiscountedAmount
         {
             get
             {
-                decimal c = 0;
+                double c = 0;
                 foreach (var item in Items)
                 {
                     c += item.TotalDiscountedItemAmount;
@@ -46,7 +46,7 @@ namespace ECommerce.Models
                 return c;
             }
         }
-        public decimal CouponDiscountAmount { get; private set; }
+        public double CouponDiscountAmount { get; private set; }
 
         public void AddLineItem(Item item)
         {
@@ -63,14 +63,14 @@ namespace ECommerce.Models
             }
         }
 
-        public void SetCouponDiscountAmount(decimal couponDiscountAmount)
+        public void SetCouponDiscountAmount(double couponDiscountAmount)
         {
             CouponDiscountAmount = couponDiscountAmount;
         }
 
-        public decimal DeliveryCost { get; private set; }
+        public double DeliveryCost { get; private set; }
 
-        public void SetDeliveryCost(decimal deliveryCost)
+        public void SetDeliveryCost(double deliveryCost)
         {
             DeliveryCost = deliveryCost;
         }

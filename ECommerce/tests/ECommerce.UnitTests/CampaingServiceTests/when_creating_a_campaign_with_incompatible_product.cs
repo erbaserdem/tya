@@ -14,7 +14,7 @@ namespace ECommerce.UnitTests.CampaingServiceTests
     public class when_creating_a_campaign_with_incompatible_product
     {
         private string categoryTitle = "CategoryTitle";
-        private decimal discountAmount = 35m;
+        private double discountAmount = 35;
         private DiscountType discountType = DiscountType.Amount;
         private int discountMinItemCount = 5;
         private ICampaignRepo campaignRepo = new InMemoryCampaignRepo();

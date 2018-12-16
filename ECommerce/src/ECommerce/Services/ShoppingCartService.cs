@@ -28,7 +28,7 @@ namespace ECommerce.Services
             }
         }
 
-        private decimal GetBestPossibleDiscountAmountForItem(string categoryTitle, int cartItemQuantity, decimal cartItemTotalItemAmount)
+        private double GetBestPossibleDiscountAmountForItem(string categoryTitle, int cartItemQuantity, double cartItemTotalItemAmount)
         {
             var campaigns =
                 CampaignService.GetCampaignsByCategoryTitleAndMinimumQuantity(categoryTitle, cartItemQuantity);
@@ -56,6 +56,10 @@ namespace ECommerce.Services
             if (coupon.MinCartAmount > cart.ItemsTotalAmount)
             {
                 throw new Exception("Coupon couldnt be applied to cart since cart does not meet the minimum amount criteria");
+            }
+            if (cart.CouponDiscountAmount > 0)
+            {
+                throw new Exception("A coupon is already applied to the cart");
             }
 
             var discountAmount = coupon.Type == DiscountType.Amount

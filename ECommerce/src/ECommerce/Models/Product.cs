@@ -3,14 +3,14 @@
 
     public class Product
     {
-        public Product(decimal price, string title, string categoryTitle)
+        public Product(double price, string title, string categoryTitle)
         {
             Price = price;
             Title = title;
             CategoryTitle = categoryTitle;
         }
         
-        public decimal Price { get; }
+        public double Price { get; }
         public string Title { get; }
         public string CategoryTitle { get; }
     }

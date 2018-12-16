@@ -20,7 +20,7 @@ namespace ECommerce.Services
             this.productService = productService;
         }
 
-        public void CreateCampaign(string categoryTitle, decimal amount, int minItemCount, DiscountType type)
+        public void CreateCampaign(string categoryTitle, double amount, int minItemCount, DiscountType type)
         {
             EnsureCampaignIsValid(categoryTitle, amount, minItemCount, type);
             campaignRepo.CreateCampaign(new Campaign(categoryTitle, amount, minItemCount, type));
@@ -36,7 +36,7 @@ namespace ECommerce.Services
             return campaignRepo.GetCampaignsByCategoryTitleAndMinimumQuantity(categoryTitle, minQty);
         }
 
-        private void EnsureCampaignIsValid(string categoryTitle, decimal amount, int minItemCount, DiscountType type)
+        private void EnsureCampaignIsValid(string categoryTitle, double amount, int minItemCount, DiscountType type)
         {
             if (!categoryService.CategoryExists(categoryTitle))
             {

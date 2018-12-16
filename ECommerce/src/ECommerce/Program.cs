@@ -12,7 +12,7 @@ namespace ECommerce
     {
         static void Main(string[] args)
         {
-            decimal costPerDelivery = 5, costPerProduct = 6, fixedCost = 2.99m;
+            double costPerDelivery = 5, costPerProduct = 6, fixedCost = 2.99;
             var serviceProvider = new ServiceCollection()
                 .AddSingleton<ICampaignRepo, InMemoryCampaignRepo>()
                 .AddSingleton<IProductRepo, InMemoryProductRepo>()

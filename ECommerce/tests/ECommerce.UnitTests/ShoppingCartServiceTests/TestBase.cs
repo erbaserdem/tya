@@ -19,7 +19,7 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
         protected ShoppingCart cart = new ShoppingCart();
         protected ShoppingCartService cartService;
         protected Campaign rateTypeCampaign, amountTypeCampaign;
-        protected decimal rateTypeDiscountAmount = 15, amountTypeDiscountAmount = 15;
+        protected double rateTypeDiscountAmount = 15, amountTypeDiscountAmount = 15;
         protected string ParentCategory= "Parent";
         protected IList<Campaign> campaigns;
         protected readonly int quantity = 15;
@@ -35,7 +35,7 @@ namespace ECommerce.UnitTests.ShoppingCartServiceTests
 
         protected virtual void SetUpData()
         {
-            productToAddCart = new Product(90m, "productTitle", ParentCategory);
+            productToAddCart = new Product(90, "productTitle", ParentCategory);
             rateTypeCampaign = new Campaign(ParentCategory, rateTypeDiscountAmount, quantity - 10, DiscountType.Rate);
             amountTypeCampaign = new Campaign(ParentCategory, amountTypeDiscountAmount, quantity - 10, DiscountType.Amount);
             campaigns = new List<Campaign>

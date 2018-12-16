@@ -2,7 +2,7 @@
 {
     public class Coupon
     {
-        public Coupon(decimal minCartAmount, decimal amount, DiscountType type)
+        public Coupon(double minCartAmount, double amount, DiscountType type)
         {
             MinCartAmount = minCartAmount;
             Amount = amount;
@@ -16,8 +16,8 @@
         }
 
 
-        public decimal MinCartAmount { get; private set; }
-        public decimal Amount { get; private set; }
+        public double MinCartAmount { get; private set; }
+        public double Amount { get; private set; }
         public DiscountType Type{ get; private set; }
         public CouponStatus Status{ get; private set; }
     }

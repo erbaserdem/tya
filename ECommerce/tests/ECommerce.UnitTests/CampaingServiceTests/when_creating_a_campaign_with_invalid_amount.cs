@@ -38,7 +38,7 @@ namespace ECommerce.UnitTests.CampaingServiceTests
         [TestCase(200)]
         [TestCase(00)]
         [TestCase(-24)]
-        public void it_should_throw_exception_due_to_invalid_amount(decimal amount)
+        public void it_should_throw_exception_due_to_invalid_amount(double amount)
         {
             action = () =>
             {

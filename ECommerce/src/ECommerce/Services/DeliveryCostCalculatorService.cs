@@ -6,17 +6,17 @@ namespace ECommerce.Services
 {
     class DeliveryCostCalculatorService : IDeliveryCostCalculatorService
     {
-        public DeliveryCostCalculatorService(decimal costPerDelivery, decimal costPerProduct, decimal fixedCost)
+        public DeliveryCostCalculatorService(double costPerDelivery, double costPerProduct, double fixedCost)
         {
             CostPerDelivery = costPerDelivery;
             CostPerProduct = costPerProduct;
             FixedCost = fixedCost;
         }
 
-        public decimal CostPerDelivery { get; set; }
-        public decimal CostPerProduct { get; set; }
-        public decimal FixedCost { get; set; }
-        public decimal CalculateDeliveryCost(ShoppingCart cart)
+        public double CostPerDelivery { get; set; }
+        public double CostPerProduct { get; set; }
+        public double FixedCost { get; set; }
+        public double CalculateDeliveryCost(ShoppingCart cart)
         {
             var numberOfDeliveries = cart.Items.Select(i => i.Product.CategoryTitle).Distinct().Count();
             var numberOfProducts = cart.Items.Select(i => i.Product.Title).Distinct().Count();

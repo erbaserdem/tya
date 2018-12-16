@@ -7,7 +7,7 @@ namespace ECommerce.Services.Interfaces
     {
         Product GetProductByTitle(string title);
         IEnumerable<Product> GetProductsByCategoryTitle(string title);
-        void CreateProduct(decimal price, string title, string categoryTitle);
+        void CreateProduct(double price, string title, string categoryTitle);
         bool ProductExists(string productTitle);
     }
 }
